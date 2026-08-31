@@ -6,7 +6,7 @@ const dist = path.join(root, 'dist');
 const origin = 'https://pratix.io';
 const metadata = { title: 'Free Programmatic Ad Layout & Banner Placeholder Generator | Pratix.io', description: 'Preview responsive ad placements and banner placeholders directly in your browser.', route: '/en/ad-layout-generator' };
 function esc(v) { return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
-function decode(v) { const m = v.match(/atob\("([A-Za-z0-9+/=]+)"\)/); return m ? Buffer.from(m[1], 'base64').toString('utf8') : v; }
+function decode(v) { if (v.trimStart().startsWith('<')) return v; const m = v.match(/atob\("([A-Za-z0-9+/=]+)"\)/); return m ? Buffer.from(m[1], 'base64').toString('utf8') : v; }
 function tag(html, pattern, replacement) { return pattern.test(html) ? html.replace(pattern, replacement) : html.replace('</head>', replacement + '\n</head>'); }
 let html = decode(source).replaceAll('https://yourdomain.com', origin);
 html = tag(html, /<html\s+lang="[^"]*"[^>]*>/, `<html lang="en">`);

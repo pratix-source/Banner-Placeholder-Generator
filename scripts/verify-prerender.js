@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'dist', 'en', 'ad-layout-generator', 'index.html'), 'utf8');
-const required = ['<title>Free Programmatic Ad Layout & Banner Placeholder Generator | Pratix.io</title>', '<link rel="canonical" href="https://pratix.io/en/ad-layout-generator" />', 'canvas', 'download'];
+const required = ['<title>Free Programmatic Ad Layout &amp; Banner Placeholder Generator | Pratix.io</title>', '<link rel="canonical" href="https://pratix.io/en/ad-layout-generator" />', 'ad-placeholder', 'download'];
 const missing = required.filter(x => !html.includes(x));
 if (missing.length) throw new Error(`Missing markers: ${missing.join(', ')}`);
 if ((html.match(/data-prerender-hreflang="true"/g) || []).length !== 2) throw new Error('Expected 2 hreflang links');
